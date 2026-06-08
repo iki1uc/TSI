@@ -1,1 +1,8 @@
+wurf:
+  version: "1.0"
+  kontrollschicht:
+    aktiv: true
+    share: 0.01
+    operator: "check(raum)"
+    bind: "Kontroll-Seil"
 
