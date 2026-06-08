@@ -1,7 +1,10 @@
-respo: "Q4"
-id_op: "Q4"
-base: 4
+module:
+  name: "OP"
+  role: "STATUS"
+  share: 0.33
 
-line: "L(n)=3n"
-instance: "I(n)=base+3n"
-axis: "A(n)=floor(n/3)+1"
+technik:
+  formula_fragment: "v_OP / 3"
+  operator_fragment: "1 - v_OP"
+  bind_fragment: "OP hält Basis-Seil"
+  question: "Willst du diesen 33%-Teil aktivieren?"
