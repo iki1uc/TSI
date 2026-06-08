@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0d0d0f;color:#00eaff;font-family:monospace;">
+<h1>OP – Operator</h1>
+
+<a href="plus.html">+</a>
+<a href="minus.html">-</a>
+
+<pre id="out">lade…</pre>
+
+<script type="module">
+import { loadYML } from './loadYML.js';
+import { WG, setWG } from './wg.js';
+
+const yml = await loadYML();
+
+document.getElementById("out").textContent =
+  JSON.stringify({
+    yml,
+    wirkungsgrad: WG
+  }, null, 2);
+</script>
+
+</body>
+</html>
 
