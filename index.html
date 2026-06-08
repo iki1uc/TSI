@@ -2,18 +2,36 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>OP – INDEX (81(1))</title>
+  <title>INDEX – 81(1)</title>
+
   <script src="/js/js-yaml.min.js"></script>
+
   <script type="module">
     import { generator } from "/br/generator.js";
+    import { borgVerify } from "/br/borg_verify.js";
+    import { borgAutoScan } from "/br/borg_autoscan.js";
 
     window.onload = async () => {
+
+      // 1) Molekül + Aufstellung erzeugen (mit Kontrollschicht)
       const data = await generator();
+
+      // 2) HTML‑Material scannen
+      const htmlScan = borgAutoScan();
+
+      // 3) BORG‑Verify
+      const verify = await borgVerify(data, htmlScan);
+
+      // 4) Ausgabe
       document.getElementById("out").textContent =
-        JSON.stringify(data.aufstellung, null, 2);
+        JSON.stringify({
+          aufstellung: data.aufstellung,
+          verify
+        }, null, 2);
     };
   </script>
 </head>
+
 <body>
   <pre id="out"></pre>
 </body>
