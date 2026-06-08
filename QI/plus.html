@@ -1,1 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0d0d0f;color:#00eaff;font-family:monospace;">
+<h1>+</h1>
+<script type="module">
+import { OP } from './op.js';
+import { WG } from './wg.js';
 
+const result = OP(1, WG);
+document.body.innerHTML += "<pre>"+JSON.stringify(result,null,2)+"</pre>";
+</script>
+</body>
+</html>
