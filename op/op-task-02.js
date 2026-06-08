@@ -16,4 +16,3 @@ export const OP_TASK = {
         }
     }
 }
-
