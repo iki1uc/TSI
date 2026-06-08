@@ -1,1 +1,8 @@
+{
+  "name": "OP",
+  "axis": "HA",
+  "wg": 0.77,
+  "mode": "editable",
+  "description": "Operator für Innen/Außen-Schaltung"
+}
 
