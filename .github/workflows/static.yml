@@ -1,10 +1,12 @@
-module:
-  name: "OP"
-  role: "STATUS"
-  share: 0.33
+seeu:
+  version: "2026.48"
+  root: true
 
-technik:
-  formula_fragment: "v_OP / 3"
-  operator_fragment: "1 - v_OP"
-  bind_fragment: "OP hält Basis-Seil"
-  question: "Willst du diesen 33%-Teil aktivieren?"
+geometry:
+  primary: "quadrat"
+  subforms:
+    - "dreieck_1"
+    - "dreieck_2"
+
+formula:
+  quadrat: "Q = Δ1 + Δ2"
