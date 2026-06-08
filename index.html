@@ -2,15 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Kandidat Index</title>
+  <title>OP – INDEX (81(1))</title>
+  <script src="/js/js-yaml.min.js"></script>
+  <script type="module">
+    import { generator } from "/br/generator.js";
+
+    window.onload = async () => {
+      const data = await generator();
+      document.getElementById("out").textContent =
+        JSON.stringify(data.aufstellung, null, 2);
+    };
+  </script>
 </head>
 <body>
-  <h1>Kandidat: {{respo}}</h1>
-  <p>Base: {{base}}</p>
-  <p>Line: L(n)=3n</p>
-  <p>Instance: I(n)=base+3n</p>
-  <p>Axis: A(n)=floor(n/3)+1</p>
-
-  <a href="id.html">→ zur ID‑Ansicht</a>
+  <pre id="out"></pre>
 </body>
 </html>
