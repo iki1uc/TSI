@@ -13,21 +13,12 @@
 
     window.onload = async () => {
 
-      // 1) Molekül + Aufstellung erzeugen
-      const data = await generator();
-
-      // 2) HTML‑Material scannen
-      const htmlScan = borgAutoScan();
-
-      // 3) BORG‑Verify
+      const data = await generator();      // Aufstellung 81
+      const htmlScan = borgAutoScan();     // HTML-Material
       const verify = await borgVerify(data, htmlScan);
 
-      // 4) Ausgabe
       document.getElementById("out").textContent =
-        JSON.stringify({
-          aufstellung: data.aufstellung,
-          verify
-        }, null, 2);
+        JSON.stringify({ data, htmlScan, verify }, null, 2);
     };
   </script>
 </head>
