@@ -1,1 +1,193 @@
+v_OP, v_iki1uc, v_iki2li ∈ {0,1}
+
+B = (v_OP + v_iki1uc + v_iki2li) / 3
+L = 1 - B
+
+v̄_OP      = 1 - v_OP
+v̄_iki1uc  = 1 - v_iki1uc
+v̄_iki2li  = 1 - v_iki2li
+
+d_OP      = v̄_OP / 3
+d_iki1uc  = v̄_iki1uc / 3
+d_iki2li  = v̄_iki2li / 3
+
+respo: "Q3"
+id_op: "Q3"
+base: 3
+
+line: "L(n)=3n"
+instance: "I(n)=base+3n"
+axis: "A(n)=floor(n/3)+1"
+
+deliver:
+  identity: true
+  fraction: "1/3"
+
+validity:
+  v_iki2li: "ID != UNBEKANNT"
+
+respo: "Q4"
+id_op: "Q4"
+base: 4
+
+line: "L(n)=3n"
+instance: "I(n)=base+3n"
+axis: "A(n)=floor(n/3)+1"
+
+deliver:
+  status: true
+  fraction: "1/3"
+
+validity:
+  v_OP: "STATUS_VALID"
+  v̄_OP: "1 - v_OP"
+
+respo: "Q1UC"
+id_op: "Q1UC"
+base: 1
+
+geometry:
+  angleA: "A(n)=angle(v12,v23)"
+  angleB: "B(n)=angle(v23,v31)"
+  sum: "S(n)=A(n)+B(n)"
+  rule: "S(n) < 180"
+
+line: "L(n)=3n"
+instance: "I(n)=base+3n"
+axis: "A(n)=floor(n/3)+1"
+
+deliver:
+  geometry: true
+  fraction: "1/3"
+
+validity:
+  v_iki1uc: "S(n) < 180"
+  v̄_iki1uc: "1 - v_iki1uc"
+
+triangle_bund:
+  formula: "(v_OP + v_iki1uc + v_iki2li) / 3"
+  required: 1
+  systems:
+    OP: 1/3
+    iki1uc: 1/3
+    iki2li: 1/3
+  gap: "1 - ((v_OP + v_iki1uc + v_iki2li) / 3)"
+
+SCAN:
+  B: "(v_OP + v_iki1uc + v_iki2li) / 3"
+  L: "1 - B"
+
+  contributions:
+    OP: "v_OP / 3"
+    iki1uc: "v_iki1uc / 3"
+    iki2li: "v_iki2li / 3"
+
+  deficits:
+    OP: "(1 - v_OP) / 3"
+    iki1uc: "(1 - v_iki1uc) / 3"
+    iki2li: "(1 - v_iki2li) / 3"
+
+┌───────────────────────────────────────────────┐
+│                 1/3‑BUND‑SYSTEM               │
+└───────────────────────────────────────────────┘
+
+   Systeme:        OP        iki1uc        iki2li
+   Beitrag v:      v_OP      v_iki1uc      v_iki2li
+   Gegensatz v̄:   1-v_OP    1-v_iki1uc    1-v_iki2li
+
+   Anteil c:       v_OP/3    v_iki1uc/3    v_iki2li/3
+   Lücke d:       (1-v_OP)/3 (1-v_iki1uc)/3 (1-v_iki2li)/3
+
+────────────────────────────────────────────────────────────
+
+                   BUND‑STÄRKE B
+        B = (v_OP + v_iki1uc + v_iki2li) / 3
+
+                   BUND‑LÜCKE L
+                L = 1 - B = (3 - Σv) / 3
+
+────────────────────────────────────────────────────────────
+
+                 ASCII‑BUND‑MATRIX
+
+                 v_OP   v_iki1uc   v_iki2li
+                 ┌──────┬──────────┬─────────┐
+ Beitrag (c)      │ v/3  │  v/3     │  v/3    │
+ Lücke (d)        │(1-v)/3│(1-v)/3  │(1-v)/3  │
+                 └──────┴──────────┴─────────┘
+
+────────────────────────────────────────────────────────────
+
+                BUND‑ZUSTANDSRAUM (ASCII)
+
+   B = 1       →   VOLLSTÄNDIGER BUND (Dreieck garantiert)
+   B = 2/3     →   TEILBUND (ein System fehlt)
+   B = 1/3     →   MINIMALBUND (zwei Systeme fehlen)
+   B = 0       →   KEIN BUND
+
+────────────────────────────────────────────────────────────
+
+           1/3‑BUND‑DREIECK (ASCII‑GEOMETRIE)
+
+                 (iki1uc)
+                    ▲
+                    │ 1/3
+                    │
+        (OP) 1/3 ◄──┼──► 1/3 (iki2li)
+                    │
+                    ▼
+                 (BUND)
+
+────────────────────────────────────────────────────────────
+
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="260" viewBox="0 0 520 260">
+
+  <!-- Titel -->
+  <text x="260" y="24" text-anchor="middle" font-family="monospace" font-size="16">
+    1/3‑BUND‑MATRIX
+  </text>
+
+  <!-- Spaltenüberschriften -->
+  <text x="160" y="60" text-anchor="middle" font-family="monospace" font-size="14">OP</text>
+  <text x="260" y="60" text-anchor="middle" font-family="monospace" font-size="14">iki1uc</text>
+  <text x="360" y="60" text-anchor="middle" font-family="monospace" font-size="14">iki2li</text>
+
+  <!-- Tabellenrahmen -->
+  <!-- Zeile: Beitrag c -->
+  <rect x="100" y="80" width="80" height="40" fill="none" stroke="black" stroke-width="1"/>
+  <rect x="200" y="80" width="80" height="40" fill="none" stroke="black" stroke-width="1"/>
+  <rect x="300" y="80" width="80" height="40" fill="none" stroke="black" stroke-width="1"/>
+
+  <!-- Zeile: Lücke d -->
+  <rect x="100" y="120" width="80" height="40" fill="none" stroke="black" stroke-width="1"/>
+  <rect x="200" y="120" width="80" height="40" fill="none" stroke="black" stroke-width="1"/>
+  <rect x="300" y="120" width="80" height="40" fill="none" stroke="black" stroke-width="1"/>
+
+  <!-- Zeilenlabels -->
+  <text x="70" y="105" text-anchor="end" font-family="monospace" font-size="12">Beitrag c</text>
+  <text x="70" y="145" text-anchor="end" font-family="monospace" font-size="12">Lücke d</text>
+
+  <!-- Zellenformeln: Beitrag -->
+  <text x="140" y="105" text-anchor="middle" font-family="monospace" font-size="12">v_OP/3</text>
+  <text x="240" y="105" text-anchor="middle" font-family="monospace" font-size="12">v_iki1uc/3</text>
+  <text x="340" y="105" text-anchor="middle" font-family="monospace" font-size="12">v_iki2li/3</text>
+
+  <!-- Zellenformeln: Lücke -->
+  <text x="140" y="145" text-anchor="middle" font-family="monospace" font-size="12">(1−v_OP)/3</text>
+  <text x="240" y="145" text-anchor="middle" font-family="monospace" font-size="12">(1−v_iki1uc)/3</text>
+  <text x="340" y="145" text-anchor="middle" font-family="monospace" font-size="12">(1−v_iki2li)/3</text>
+
+  <!-- Bund-Stärke B -->
+  <text x="260" y="190" text-anchor="middle" font-family="monospace" font-size="12">
+    B = (v_OP + v_iki1uc + v_iki2li) / 3
+  </text>
+
+  <!-- Bund-Lücke L -->
+  <text x="260" y="210" text-anchor="middle" font-family="monospace" font-size="12">
+    L = 1 − B
+  </text>
+
+</svg>
+
+  v̄_iki2li: "1 - v_iki2li"
 
