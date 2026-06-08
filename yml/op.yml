@@ -1,1 +1,7 @@
+module: OP
+share: 0.33
+role: STATUS
+fragment: "v_OP / 3"
+operator: "1 - v_OP"
+bind: "Basis-Seil"
 
