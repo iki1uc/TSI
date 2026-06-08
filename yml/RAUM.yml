@@ -1,1 +1,24 @@
+raum:
+  version: "1.0"
+  mode: "global"
+  share: 0.81
 
+  segmente:
+
+    OP:
+      share: 0.27
+      fragment: "v_OP / 3"
+      operator: "1 - v_OP"
+      bind: "Basis-Seil"
+
+    iki1uc:
+      share: 0.27
+      fragment: "v_iki1uc / 3"
+      operator: "1 - v_iki1uc"
+      bind: "Spitzen-Seil"
+
+    iki2li:
+      share: 0.27
+      fragment: "v_iki2li / 3"
+      operator: "1 - v_iki2li"
+      bind: "Seiten-Seil"
