@@ -1,1 +1,17 @@
+scan:
+  ui:
+    slot: "ui_scan"
+    covers: ["dom", "html", "buttons", "scripts"]
+
+  real:
+    slot: "real_scan"
+    covers: ["engine", "achsen", "werte"]
+
+  signal:
+    slot: "signal_scan"
+    covers: ["impulse", "flags", "states"]
+
+  beam:
+    slot: "beam_scan"
+    covers: ["winkel", "richtung", "raum"]
 
