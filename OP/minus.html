@@ -1,1 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0d0d0f;color:#00eaff;font-family:monospace;">
+<h1>OP -</h1>
+
+<pre id="out">lade…</pre>
+
+<script type="module">
+import { OP } from './op.js';
+
+const result = await OP(-1);
+document.getElementById("out").textContent =
+  JSON.stringify(result, null, 2);
+</script>
+
+</body>
+</html>
 
