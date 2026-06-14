@@ -1,19 +1,58 @@
+// ===============================
+// OP-ANCHOR 4-INPUT-MERGE
+// ===============================
 
-function OP_ANCHOR(input) {
-    // 1. Quelle markieren
-    const source = input.source || "UNKNOWN";
+const OP_ANCHOR = {
+    scan: null,
+    toolator: null,
+    raw: null,
+    ai_legacy: null,
 
-    // 2. Normalisieren
-    const frame = {
-        source,
-        type: input.type || "event",
-        payload: input.payload || {},
-        time: Date.now()
-    };
+    // INPUTS
+    fromSCAN(data) {
+        this.scan = data;
+        this.tryMerge();
+    },
 
-    // 3. Regeln anwenden (hier kannst du später ausbauen)
-    // z.B. filtern, umschreiben, loggen
+    fromTOOLATOR(data) {
+        this.toolator = data;
+        this.tryMerge();
+    },
 
-    // 4. An OP weitergeben
-    OP_ACCEPT(frame);
-}
+    fromRAW(data) {
+        this.raw = data;
+        this.tryMerge();
+    },
+
+    fromAI(data) {
+        this.ai_legacy = data;
+        this.tryMerge();
+    },
+
+    // MERGE
+    tryMerge() {
+        if (this.scan && this.toolator && this.raw && this.ai_legacy) {
+            const frame = {
+                op_frame: {
+                    scan: this.scan,
+                    toolator: this.toolator,
+                    raw: this.raw,
+                    ai_legacy: this.ai_legacy,
+                    time: Date.now(),
+                    merge_state: "complete"
+                }
+            };
+
+            OP_ACCEPT(frame); // Übergabe an OP
+            this.reset();
+        }
+    },
+
+    // RESET
+    reset() {
+        this.scan = null;
+        this.toolator = null;
+        this.raw = null;
+        this.ai_legacy = null;
+    }
+};
