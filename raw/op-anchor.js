@@ -43,7 +43,7 @@ const OP_ANCHOR = {
                 }
             };
 
-            OP_ACCEPT(frame); // Übergabe an OP
+            OP_ACCEPT(frame);
             this.reset();
         }
     },
@@ -55,4 +55,35 @@ const OP_ANCHOR = {
         this.raw = null;
         this.ai_legacy = null;
     }
+};
+
+// ===============================
+// OP ACCEPTOR
+// ===============================
+
+function OP_ACCEPT(frame) {
+    if (typeof OP_RECEIVE === "function") {
+        OP_RECEIVE(frame);
+    } else {
+        console.warn("OP_RECEIVE nicht definiert");
+    }
+}
+
+// ===============================
+// OP RECEIVER (Platzhalter)
+// ===============================
+
+function OP_RECEIVE(frame) {
+    console.log("OP FRAME:", frame);
+}
+
+// ===============================
+// EXPORT API
+// ===============================
+
+export const OP_ANCHOR_API = {
+    scan: (data) => OP_ANCHOR.fromSCAN(data),
+    toolator: (data) => OP_ANCHOR.fromTOOLATOR(data),
+    raw: (data) => OP_ANCHOR.fromRAW(data),
+    ai: (data) => OP_ANCHOR.fromAI(data)
 };
