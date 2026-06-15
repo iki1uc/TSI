@@ -1,24 +1,39 @@
-name: OP-Master
+name: respo-${{ github.repository }}
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["OP-Master"]
+    types: [completed]
 
 jobs:
-  op_init:
+  modul_active:
     runs-on: ubuntu-latest
-    outputs:
-      kern_id: ${{ steps.makeid.outputs.kern_id }}
 
     steps:
-      - name: OP erzeugt ROOT-Kern-ID
-        id: makeid
-        run: echo "kern_id=ROOT-OP-$(date +%s)" >> $GITHUB_OUTPUT
+      - name: [MOD] Empfang ROOT-Kern-ID
+        run: echo "[MOD-ACTIVE] ROOT-Kern-ID empfangen – Modul=${{ github.repository }}"
 
-      - name: OP ROOT-VERIFY Broadcast
+      - name: [NC] OK-Block
+        if: ${{ success() }}
         run: |
-          echo "OP: ROOT Kern-ID aktiv = ${{ steps.makeid.outputs.kern_id }}"
-          echo "OP: Sende VERIFY an iki1uc"
-          echo "OP: Sende VERIFY an iki7uc"
-          echo "OP: Sende VERIFY an iki2li"
-          echo "OP: Sende VERIFY an dil.siz.ler (ROOT-Hilfe)"
-          echo "OP: ROOT-VERIFY abgeschlossen"
+          echo "[NC-OK]"
+          echo "UNIT=MODULE"
+          echo "MODE=ACTIVE"
+          echo "NAME=${{ github.repository }}"
+          echo "FILE=.github/workflows/static.yml"
+          echo "DETAIL=\"Modul aktiv, Trigger korrekt, OP-Master erkannt\""
+          echo "IMPACT=\"Dienst aktiv\""
+
+      - name: [NC] ERROR-Block
+        if: ${{ failure() }}
+        run: |
+          echo "[NC-ERROR]"
+          echo "UNIT=MODULE"
+          echo "MODE=ACTIVE"
+          echo "NAME=${{ github.repository }}"
+          echo "TYPE=RUNTIME"
+          echo "FILE=.github/workflows/static.yml"
+          echo "DETAIL=\"Modul gestartet, aber interner Fehler\""
+          echo "IMPACT=\"Dienst ausgefallen\""
+          echo "ACTION=\"YML prüfen, Syntax prüfen, letzte Änderung prüfen\""
+          exit 1
