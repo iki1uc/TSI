@@ -4,14 +4,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  op_init:
+  op_root:
     runs-on: ubuntu-latest
+
     steps:
-      - name: OP erzeugt ROOT-Kern-ID
-        id: makeid
+      - name: ROOT-Kern-ID erzeugen
+        id: rootid
         run: echo "kern_id=ROOT-OP-$(date +%s)" >> $GITHUB_OUTPUT
 
-      - name: OP ROOT-VERIFY Broadcast
+      - name: ROOT-Kern-ID ausgeben
+        run: echo "OP: ROOT-Kern-ID = ${{ steps.rootid.outputs.kern_id }}"
+
+      - name: VERIFY-Broadcast
         run: |
-          echo "OP: ROOT Kern-ID aktiv = ${{ steps.makeid.outputs.kern_id }}"
-          echo "OP: Sende VERIFY an alle Module"
+          echo "OP: VERIFY → iki1uc"
+          echo "OP: VERIFY → iki7uc"
+          echo "OP: VERIFY → iki2li"
+          echo "OP: VERIFY → dil.siz.ler"
+          echo "OP: VERIFY abgeschlossen"
