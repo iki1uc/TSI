@@ -1,34 +1,18 @@
-op:
-  modul: "OP"
-  typ: "kern_allocator"
+name: OP-Master
 
-  id:
-    schema: "op-kern-{counter}"
-    start: 1
-    auto_increment: true
+on:
+  workflow_dispatch:
 
-  init:
-    zustand: "INIT"
-    energie: 1.0
-    kompetenz_seed: "v_op / 4"
+jobs:
+  op_init:
+    runs-on: ubuntu-latest
+    outputs:
+      kern_id: ${{ steps.makeid.outputs.kern_id }}
 
-  kompetenz:
-    matrix:
-      - "analyse"
-      - "bindung"
-      - "richtung"
-      - "respo"
-    level_start: 0.25
-    level_max: 1.0
+    steps:
+      - name: OP erzeugt Kern-ID
+        id: makeid
+        run: echo "kern_id=op-$(date +%s)" >> $GITHUB_OUTPUT
 
-  status:
-    maschine:
-      - { von: "INIT", nach: "ACTIVE" }
-      - { von: "ACTIVE", nach: "RESPO" }
-      - { von: "RESPO", nach: "IDLE" }
-
-  respo:
-    ausgabe: "kern_id + kompetenz + status"
-    bindung: "OP hält Kern‑Seil"
-
-version: "2026.48"
+      - name: OP OK + VERIFY
+        run: echo "OP: OK – VERIFY – Kern-ID aktiv"
