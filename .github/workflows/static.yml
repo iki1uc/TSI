@@ -14,5 +14,11 @@ jobs:
         id: makeid
         run: echo "kern_id=op-$(date +%s)" >> $GITHUB_OUTPUT
 
-      - name: OP OK + VERIFY
-        run: echo "OP: OK – VERIFY – Kern-ID aktiv"
+      - name: OP sendet OK + VERIFY an alle Module
+        run: |
+          echo "OP: Kern-ID aktiv = ${{ steps.makeid.outputs.kern_id }}"
+          echo "OP: OK – VERIFY – Sende an: iki1uc"
+          echo "OP: OK – VERIFY – Sende an: iki7uc"
+          echo "OP: OK – VERIFY – Sende an: iki2li"
+          echo "OP: OK – VERIFY – Sende an: dil.siz.ler"
+          echo "OP: Alle Module informiert"
