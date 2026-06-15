@@ -16,4 +16,3 @@ jobs:
 
       - name: OP OK + VERIFY
         run: echo "OP: OK – VERIFY – Kern-ID aktiv"
-
