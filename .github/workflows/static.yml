@@ -1,39 +1,17 @@
-name: respo-${{ github.repository }}
+name: OP-Master
 
 on:
-  workflow_run:
-    workflows: ["OP-Master"]
-    types: [completed]
+  workflow_dispatch:
 
 jobs:
-  modul_active:
+  op_init:
     runs-on: ubuntu-latest
-
     steps:
-      - name: [MOD] Empfang ROOT-Kern-ID
-        run: echo "[MOD-ACTIVE] ROOT-Kern-ID empfangen – Modul=${{ github.repository }}"
+      - name: OP erzeugt ROOT-Kern-ID
+        id: makeid
+        run: echo "kern_id=ROOT-OP-$(date +%s)" >> $GITHUB_OUTPUT
 
-      - name: [NC] OK-Block
-        if: ${{ success() }}
+      - name: OP ROOT-VERIFY Broadcast
         run: |
-          echo "[NC-OK]"
-          echo "UNIT=MODULE"
-          echo "MODE=ACTIVE"
-          echo "NAME=${{ github.repository }}"
-          echo "FILE=.github/workflows/static.yml"
-          echo "DETAIL=\"Modul aktiv, Trigger korrekt, OP-Master erkannt\""
-          echo "IMPACT=\"Dienst aktiv\""
-
-      - name: [NC] ERROR-Block
-        if: ${{ failure() }}
-        run: |
-          echo "[NC-ERROR]"
-          echo "UNIT=MODULE"
-          echo "MODE=ACTIVE"
-          echo "NAME=${{ github.repository }}"
-          echo "TYPE=RUNTIME"
-          echo "FILE=.github/workflows/static.yml"
-          echo "DETAIL=\"Modul gestartet, aber interner Fehler\""
-          echo "IMPACT=\"Dienst ausgefallen\""
-          echo "ACTION=\"YML prüfen, Syntax prüfen, letzte Änderung prüfen\""
-          exit 1
+          echo "OP: ROOT Kern-ID aktiv = ${{ steps.makeid.outputs.kern_id }}"
+          echo "OP: Sende VERIFY an alle Module"
