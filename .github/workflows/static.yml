@@ -10,9 +10,15 @@ jobs:
       kern_id: ${{ steps.makeid.outputs.kern_id }}
 
     steps:
-      - name: OP erzeugt Kern-ID
+      - name: OP erzeugt ROOT-Kern-ID
         id: makeid
-        run: echo "kern_id=op-$(date +%s)" >> $GITHUB_OUTPUT
+        run: echo "kern_id=ROOT-OP-$(date +%s)" >> $GITHUB_OUTPUT
 
-      - name: OP OK + VERIFY
-        run: echo "OP: OK – VERIFY – Kern-ID aktiv"
+      - name: OP ROOT-VERIFY Broadcast
+        run: |
+          echo "OP: ROOT Kern-ID aktiv = ${{ steps.makeid.outputs.kern_id }}"
+          echo "OP: Sende VERIFY an iki1uc"
+          echo "OP: Sende VERIFY an iki7uc"
+          echo "OP: Sende VERIFY an iki2li"
+          echo "OP: Sende VERIFY an dil.siz.ler (ROOT-Hilfe)"
+          echo "OP: ROOT-VERIFY abgeschlossen"
