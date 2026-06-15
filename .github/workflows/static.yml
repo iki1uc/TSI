@@ -1,1 +1,19 @@
+name: OP-Master
+
+on:
+  workflow_dispatch:
+
+jobs:
+  op_init:
+    runs-on: ubuntu-latest
+    outputs:
+      kern_id: ${{ steps.makeid.outputs.kern_id }}
+
+    steps:
+      - name: OP erzeugt Kern-ID
+        id: makeid
+        run: echo "kern_id=op-$(date +%s)" >> $GITHUB_OUTPUT
+
+      - name: OP OK + VERIFY
+        run: echo "OP: OK – VERIFY – Kern-ID aktiv"
 
