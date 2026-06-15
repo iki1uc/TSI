@@ -1,12 +1,34 @@
-seeu:
-  version: "2026.48"
-  root: true
+op:
+  modul: "OP"
+  typ: "kern_allocator"
 
-geometry:
-  primary: "quadrat"
-  subforms:
-    - "dreieck_1"
-    - "dreieck_2"
+  id:
+    schema: "op-kern-{counter}"
+    start: 1
+    auto_increment: true
 
-formula:
-  quadrat: "Q = Δ1 + Δ2"
+  init:
+    zustand: "INIT"
+    energie: 1.0
+    kompetenz_seed: "v_op / 4"
+
+  kompetenz:
+    matrix:
+      - "analyse"
+      - "bindung"
+      - "richtung"
+      - "respo"
+    level_start: 0.25
+    level_max: 1.0
+
+  status:
+    maschine:
+      - { von: "INIT", nach: "ACTIVE" }
+      - { von: "ACTIVE", nach: "RESPO" }
+      - { von: "RESPO", nach: "IDLE" }
+
+  respo:
+    ausgabe: "kern_id + kompetenz + status"
+    bindung: "OP hält Kern‑Seil"
+
+version: "2026.48"
