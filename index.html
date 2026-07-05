@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>INDEX – 81(1)</title>
+  <title>TSI – 81(1) :: LIVE</title>
 
   <script src="/js/js-yaml.min.js"></script>
 
@@ -11,19 +11,49 @@
     import { borgVerify } from "/br/borg_verify.js";
     import { borgAutoScan } from "/br/borg_autoscan.js";
 
-    window.onload = async () => {
+    // --- Orbit 81(1) Zusatz ---
+    function orbitPulse() {
+      const t = Math.floor(Math.random() * 81);
+      return `ZACK-KLACK :: ORBIT 81(1) :: ${t}`;
+    }
 
+    // --- TSI Output Frame ---
+    function tsiFrame(data, scan, verify) {
+      return {
+        TSI: "ACTIVE",
+        ORBIT: orbitPulse(),
+        DATA: data,
+        SCAN: scan,
+        VERIFY: verify,
+        CORE: {
+          CPU: 33,
+          RAM: 44,
+          GPU: 42,
+          ROM: 3
+        }
+      };
+    }
+
+    window.onload = async () => {
       const data = await generator();      // Aufstellung 81(1)
-      const htmlScan = borgAutoScan();     // HTML-Material
-      const verify = await borgVerify(data, htmlScan);
+      const scan = borgAutoScan();         // HTML-Material
+      const verify = await borgVerify(data, scan);
+
+      const frame = tsiFrame(data, scan, verify);
 
       document.getElementById("out").textContent =
-        JSON.stringify({ data, htmlScan, verify }, null, 2);
+        JSON.stringify(frame, null, 2);
     };
   </script>
+
+  <style>
+    body { background:#000; color:#0ff; font-family:monospace; padding:20px; }
+    pre { font-size:14px; }
+  </style>
 </head>
 
 <body>
+  <h2>TSI :: 81(1) :: LIVE</h2>
   <pre id="out"></pre>
 </body>
 </html>
